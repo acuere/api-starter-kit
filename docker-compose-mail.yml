@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  iredmail:
+    image: iredmail/mariadb:stable
+    restart: unless-stopped
+    container_name: ${DOCKER_PROJECT_NAME}_iredmail
+    hostname: ${IREDMAIL_HOSTNAME}
+    domainname: ${IREDMAIL_DOMAIN}
+    environment:
+      - DOMAIN=${IREDMAIL_DOMAIN}
+      - HOSTNAME=${IREDMAIL_HOSTNAME}
+      - MYSQL_ROOT_PASSWORD=${IREDMAIL_MYSQL_ROOT_PASSWORD}
+      - TIMEZONE=${IREDMAIL_TIMEZONE}
+      - POSTMASTER_PASSWORD=${IREDMAIL_POSTMASTER_PASSWORD}
+      - SOGO_WORKERS=1
+      - IREDAPD_PLUGINS=${IREDMAIL_IREDAPD_PLUGINS}
+    volumes:
+      - ./docker/iredmail/data/backup-mysql:/var/vmail/backup/mysql
+      - ./docker/iredmail/data/mailboxes:/var/vmail/vmail1
+      - ./docker/iredmail/data/mlmmj:/var/vmail/mlmmj
+      - ./docker/iredmail/data/mlmmj-archive:/var/vmail/mlmmj-archive
+      - ./docker/iredmail/data/imapsieve_copy:/var/vmail/imapsieve_copy
+      - ./docker/iredmail/data/custom:/opt/iredmail/custom
+      - ./docker/iredmail/data/ssl:/opt/iredmail/ssl
+      - ./docker/iredmail/data/mysql:/var/lib/mysql
+      - ./docker/iredmail/data/clamav:/var/lib/clamav
+      - ./docker/iredmail/data/sa_rules:/var/lib/spamassassin
+      - ./docker/iredmail/data/postfix_queue:/var/spool/postfix
+    ports: 
+      - 25:25
+      - 587:587
+      - 110:110
+      - 143:143
+      - 993:993
+      - 995:995
