@@ -31,7 +31,8 @@ services:
       - ./docker/iredmail/data/sa_rules:/var/lib/spamassassin
       - ./docker/iredmail/data/postfix_queue:/var/spool/postfix
     ports:
-      - ${IREDMAIL_PORT}:80
+      - ${IREDMAIL_HTTP_PORT}:80
+      - ${IREDMAIL_TCP_PORT}:443
       - 25:25
       - 587:587
       - 110:110
