@@ -16,8 +16,9 @@ services:
       - MYSQL_ROOT_PASSWORD=${IREDMAIL_MYSQL_ROOT_PASSWORD}
       - TIMEZONE=${IREDMAIL_TIMEZONE}
       - POSTMASTER_PASSWORD=${IREDMAIL_POSTMASTER_PASSWORD}
-      - SOGO_WORKERS=1
       - IREDAPD_PLUGINS=${IREDMAIL_IREDAPD_PLUGINS}
+      - SOGO_WORKERS=1
+      # - MAIL_THE_TIP_FILE=NO
     volumes:
       - ./docker/iredmail/data/backup-mysql:/var/vmail/backup/mysql
       - ./docker/iredmail/data/mailboxes:/var/vmail/vmail1
@@ -31,11 +32,11 @@ services:
       - ./docker/iredmail/data/sa_rules:/var/lib/spamassassin
       - ./docker/iredmail/data/postfix_queue:/var/spool/postfix
     ports:
-      - ${IREDMAIL_HTTP_PORT}:80
-      - ${IREDMAIL_TCP_PORT}:443
-      - 25:25
-      - 587:587
-      - 110:110
-      - 143:143
-      - 993:993
-      - 995:995
+      - ${IREDMAIL_HTTP_PORT}:80         # HTTP_PORT
+      - ${IREDMAIL_TCP_PORT}:443         # TCP_PORT
+      - 25:25                            # SMTP
+      - 587:587                          # Submission
+      - 110:110                          # Unencrypted POP3
+      - 143:143                          # Unencrypted IMAP
+      - 993:993                          # Encrypted IMAP
+      - 995:995                          # Encrypted POP3
