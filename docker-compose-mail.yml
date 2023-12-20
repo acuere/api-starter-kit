@@ -7,7 +7,7 @@ services:
     hostname: ${IREDMAIL_HOSTNAME}
     domainname: ${IREDMAIL_DOMAIN}
     networks:
-      eztnet_instance2:
+      eztnet:
         ipv4_address: 172.21.0.2
     environment:
       - DOMAIN=${IREDMAIL_DOMAIN}
@@ -45,7 +45,7 @@ services:
       - 995:995                          # Encrypted POP3
 
 networks:
-  eztnet_instance2:
+  eztnet:
     driver: bridge
     ipam:
       config:
