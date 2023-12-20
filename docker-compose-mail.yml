@@ -6,6 +6,9 @@ services:
     container_name: ${DOCKER_PROJECT_NAME}_iredmail
     hostname: ${IREDMAIL_HOSTNAME}
     domainname: ${IREDMAIL_DOMAIN}
+    networks:
+      eztnet_instance2:
+        ipv4_address: 172.21.0.2
     environment:
       - DOMAIN=${IREDMAIL_DOMAIN}
       - HOSTNAME=${IREDMAIL_HOSTNAME}
@@ -40,3 +43,10 @@ services:
       - 143:143                          # Unencrypted IMAP
       - 993:993                          # Encrypted IMAP
       - 995:995                          # Encrypted POP3
+
+networks:
+  eztnet_instance2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
