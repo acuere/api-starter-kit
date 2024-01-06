@@ -4,8 +4,8 @@ services:
     image: iredmail/mariadb:stable
     restart: unless-stopped
     container_name: ${DOCKER_PROJECT_NAME}_iredmail
-    hostname: ${IREDMAIL_HOSTNAME}
-    domainname: ${IREDMAIL_DOMAIN}
+    # hostname: ${IREDMAIL_HOSTNAME}
+    # domainname: ${IREDMAIL_DOMAIN}
     networks:
       eztnet:
         ipv4_address: 172.20.0.2
